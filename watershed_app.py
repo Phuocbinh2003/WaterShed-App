@@ -53,10 +53,12 @@ def apply_watershed(img):
 
     for i in range(len(contour)):
         if hierarchy[0][i][3] == -1:
+            cv2.drawContours(image=image_vis, contours=contour,
+                             contourIdx=i, color=(0, 0, 255), thickness=1)
             x, y, w, h = cv2.boundingRect(contour[i])
 
             # Lọc các contour nhỏ
-            if w > 45 and h > 45:  # Điều kiện kích thước (có thể tùy chỉnh)
+            if w > 43 and h > 45:  # Điều kiện kích thước (có thể tùy chỉnh)
                 # Vẽ bounding box lên hình
                 cv2.rectangle(image_vis, (x, y),
                               (x + w, y + h), (0, 255, 0), 2)
@@ -83,7 +85,7 @@ if uploaded_file is not None:
 
         # # Tạo lưới subplot
 
-        st.write("### Process ")
+        st.write("### Processing")
 
         fig, axes = plt.subplots(nrows=3, ncols=3, figsize=(17, 17))
 
